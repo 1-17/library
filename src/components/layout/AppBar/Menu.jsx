@@ -1,8 +1,8 @@
-import { useCategory } from "../../../hooks"
+import { useList } from "../../../hooks"
 import Button from "../Button"
 
 const Menu = () => {
-  const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useCategory()
+  const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useList()
 
   return (
     <nav className="text-sm w-full max-sm:my-4">

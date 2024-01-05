@@ -1,15 +1,15 @@
-import { useCategory } from "../../hooks"
+import { useList } from "../../hooks"
 import Button from "./Button"
 
-const Content = () => {
-  const { selectedCategory, selectedSubcategory, subcategoryContent } = useCategory()
+const ContentList = () => {
+  const { selectedCategory, selectedSubcategory, subcategoryContent } = useList()
   
   return (
     <>
       <h2 className="font-semibold text-lg sm:text-xl mb-4">
         {`${selectedCategory} > ${selectedSubcategory}`}
       </h2>
-      <ul className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
+      <ul className="grid min-[450px]:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {
           subcategoryContent.map(content =>
             <li key={content.name}>
@@ -33,4 +33,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default ContentList

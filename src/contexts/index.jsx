@@ -1,13 +1,13 @@
 import { createContext } from "react"
-import { useList } from "../hooks"
+import { useContent } from "../hooks"
 
 export const CategoryContext = createContext()
 
 const Contexts = ({ children }) => {
-  const methods = useList()
+  const listMethods = useContent()
 
   return (
-    <CategoryContext.Provider value={{ ...methods }}>
+    <CategoryContext.Provider value={{ ...listMethods }}>
       {children}
     </CategoryContext.Provider>
   )
