@@ -4,17 +4,17 @@ import App from "../components/layout/App"
 import ContentList from "../components/layout/ContentList"
 
 const Pages = () => {
-  const { listOfContents } = useList()
+  const { contentRoutes } = useList()
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<ContentList />} />
+          {contentRoutes.map(route =>
+            <Route key={route.key} path={route.path} element={route.component} />
+          )}
         </Route>
-        {listOfContents.map(content =>
-          <Route key={content.name} path={content.name} element={content.name} />
-        )}
       </Routes>
     </Router>
   )

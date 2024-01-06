@@ -45,8 +45,29 @@ const useContent = () => {
     }
   }
 
-  const listOfContents = Object.values(list).flatMap(Object.values).flat()
-  
+  const contentRoutes = new Array()
+
+  Object.entries(list).flatMap(([key, value]) => (
+    Object.entries(value).flatMap(([subcategory, contents]) =>
+      contents.map(content => {
+        const formatName = (mapOrigin) => (mapOrigin || content).name.split(" ").join("_").toLowerCase()
+        const route = `${key}/${subcategory}/${formatName()}`.toLowerCase()
+
+        subcategoryContent.map(subcategory => {
+          if (route.includes(formatName(subcategory))) {
+            subcategory.route = route
+          }
+        })
+
+        contentRoutes.push({
+          key: formatName(),
+          path: route,
+          component: formatName()
+        })
+      })
+    )
+  ))
+
   return {
     categories,
     subcategories,
@@ -55,7 +76,7 @@ const useContent = () => {
     selectedSubcategory,
     changeSelectedCategory,
     changeSelectedSubcategory,
-    listOfContents
+    contentRoutes
   }
 }
 

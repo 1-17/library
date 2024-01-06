@@ -23,8 +23,7 @@ const ContentList = () => {
                 </p>
               </div>
               <Button
-                id={content.name.toLowerCase().split(" ").join("_")}
-                onClick={e => console.log(e.target.id)}
+                to={content.route}
                 className="leading-7 sm:leading-8"
                 >
                 Get code

@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom"
 import { useList } from "../../../hooks"
 import Button from "../Button"
 
 const Menu = () => {
+  const navigate = useNavigate()
   const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useList()
 
   return (
@@ -16,7 +18,10 @@ const Menu = () => {
               <li key={category}>
                 <Button
                   secondary={selectedCategory === category}
-                  onClick={() => changeSelectedCategory(category)}
+                  onClick={() => {
+                    changeSelectedCategory(category)
+                    navigate("/")
+                  }}
                   >
                   {category}
                 </Button>
@@ -35,7 +40,10 @@ const Menu = () => {
               <li key={subcategory}>
                 <Button
                   secondary
-                  onClick={() => changeSelectedSubcategory(subcategory)}
+                  onClick={() => {
+                    changeSelectedSubcategory(subcategory)
+                    navigate("/")
+                  }}
                   className={{
                     "before:content-['★_'] before:whitespace-nowrap": selectedSubcategory === subcategory
                   }}
