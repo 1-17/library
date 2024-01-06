@@ -22,7 +22,11 @@ const ContentList = () => {
                   {content.description}
                 </p>
               </div>
-              <Button className="leading-7 sm:leading-8">
+              <Button
+                id={content.name.toLowerCase().split(" ").join("_")}
+                onClick={e => console.log(e.target.id)}
+                className="leading-7 sm:leading-8"
+                >
                 Get code
               </Button>
             </li>

@@ -1,15 +1,14 @@
-import Contexts from "../../contexts"
+import { Outlet } from "react-router-dom"
 import AppBar from "./AppBar"
-import ContentList from "./ContentList"
 
 const App = () => {
   return (
-    <Contexts>
+    <>
       <AppBar />
-      <main className="grow p-4">
-        <ContentList />
+      <main className="p-4 pb-16">
+        <Outlet />
       </main>
-    </Contexts>
+    </>
   )
 }
 

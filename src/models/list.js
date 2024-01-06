@@ -4,7 +4,7 @@ const list = {
       {
         name: "Link",
         cover: "117k",
-        description: "Ullamco consectetur Lorem do consequat aute est cupidatat ut dolor."
+        description: "Anchor tag ready for external links or route links."
       },
       {
         name: "Button",

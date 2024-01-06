@@ -44,6 +44,8 @@ const useContent = () => {
       setSelectedSubcategory(newSubcategory)
     }
   }
+
+  const listOfContents = Object.values(list).flatMap(Object.values).flat()
   
   return {
     categories,
@@ -52,7 +54,8 @@ const useContent = () => {
     selectedCategory,
     selectedSubcategory,
     changeSelectedCategory,
-    changeSelectedSubcategory
+    changeSelectedSubcategory,
+    listOfContents
   }
 }
 
