@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react"
 import { CategoryContext } from "../contexts"
+import { capitalizeString } from "../utils"
 import articles from "../models/articles"
 
 const useMobile = () => {
   const checkIfIsMobile = () => window.matchMedia("(max-width: 640px)").matches
 
-  const [mobile, setMobile] = useState(checkIfIsMobile())
+  const [mobile, setMobile] = useState(checkIfIsMobile)
   const [menuOpen, setMenuOpen] = useState(true)
   
   useEffect(() => {
-    const checkIfIsMobileInResize = () => setMobile(checkIfIsMobile())
+    const checkIfIsMobileInResize = () => setMobile(checkIfIsMobile)
 
     window.addEventListener("resize", checkIfIsMobileInResize)
 
@@ -22,42 +23,37 @@ const useMobile = () => {
 }
 
 const useArticlesMethods = () => {
-  const categories = Object.keys(articles)
+  const categories = Object.keys(articles).map(capitalizeString)
   const [selectedCategory, setSelectedCategory] = useState(categories[0])
 
-  const subcategories = Object.keys(articles[selectedCategory])
+  const subcategories = Object.keys(articles[selectedCategory.toLowerCase()]).map(capitalizeString)
   const [selectedSubcategory, setSelectedSubcategory] = useState(subcategories[0])
 
-  const [selectedArticle, setSelectedArticle] = useState("")
+  const currentArticles = articles[selectedCategory.toLowerCase()][selectedSubcategory.toLowerCase()]
 
-  const currentArticles = articles[selectedCategory][selectedSubcategory]
-
-  const changeSelectedCategory = (newCategory) => {
-    const newSubcategories = Object.keys(articles[newCategory])
+  const changeSelectedCategory = newCategory => {
+    const newSubcategories = Object.keys(articles[newCategory.toLowerCase()])
+    const newSubcategory = capitalizeString(newSubcategories[0])
     
     if (selectedCategory !== newCategory) {
       setSelectedCategory(newCategory)
-      setSelectedSubcategory(newSubcategories[0])
+      setSelectedSubcategory(newSubcategory)
     }
-
-    setSelectedArticle("")
   }
   
-  const changeSelectedSubcategory = (newSubcategory) => {
+  const changeSelectedSubcategory = newSubcategory => {
     if (selectedSubcategory !== newSubcategory) {
       setSelectedSubcategory(newSubcategory)
     }
-
-    setSelectedArticle("")
   }
 
-  const articlesRoutes = new Array()
+  const articlesRoutes = []
 
-  Object.entries(articles).flatMap(([key, value]) => (
-    Object.entries(value).flatMap(([subcategory, articles]) =>
+  Object.entries(articles).flatMap(([categories, subcategories]) => (
+    Object.entries(subcategories).flatMap(([subcategory, articles]) => (
       articles.map(article => {
-        const formatName = (mapOrigin) => (mapOrigin || article).name.split(" ").join("_").toLowerCase()
-        const route = `${key}/${subcategory}/${formatName()}`.toLowerCase()
+        const formatName = newMap => (newMap || article).name.split(" ").join("_").toLowerCase()
+        const route = `${categories}/${subcategory}/${formatName()}`
 
         currentArticles.map(subcategory => {
           if (route.includes(formatName(subcategory))) {
@@ -71,8 +67,21 @@ const useArticlesMethods = () => {
           component: formatName()
         })
       })
-    )
+    ))
   ))
+
+  const articlePath = pathname => {
+    const path = {}
+
+    if (pathname !== "/") {
+      path.parts = pathname.split("/")
+      path.name = path.parts[path.parts.length - 1]
+      path.articleName = capitalizeString(path.name)
+      path.isArticle = path.parts.includes(path.articleName.toLowerCase())
+    }
+
+    return path
+  }
 
   return {
     categories,
@@ -82,9 +91,8 @@ const useArticlesMethods = () => {
     selectedSubcategory,
     changeSelectedCategory,
     changeSelectedSubcategory,
-    selectedArticle,
-    setSelectedArticle,
-    articlesRoutes
+    articlesRoutes,
+    articlePath
   }
 }
 

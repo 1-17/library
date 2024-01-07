@@ -1,6 +1,6 @@
 const articles = {
-  Components: {
-    Layout: [
+  components: {
+    layout: [
       {
         name: "Link",
         cover: "117k",
@@ -17,7 +17,7 @@ const articles = {
         description: "Lorem cupidatat proident nulla ad adipisicing tempor."
       }
     ],
-    Form: [
+    form: [
       {
         name: "Form",
         cover: "117k",
@@ -35,8 +35,8 @@ const articles = {
       }
     ]
   },
-  Widgets: {
-    Notion: [
+  widgets: {
+    notion: [
       {
         name: "Typography",
         cover: "117k",

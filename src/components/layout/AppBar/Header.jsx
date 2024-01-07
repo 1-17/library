@@ -9,8 +9,11 @@ const Header = () => {
   const { menuOpen, toggleMenu } = useMobile()
 
   return (
-    <header className="bg-light sticky top-0 px-4 pt-4 shadow-md">
-      <Logo />
+    <header className="bg-light border-b-2 sticky top-0 px-4 pt-4 z-10">
+      <div className="flex justify-between items-baseline gap-4">
+        <Logo />
+        <Credits />
+      </div>
       <div
         id="menu"
         role="menu"
@@ -24,19 +27,18 @@ const Header = () => {
           )}
         >
         <Menu />
-        <Credits />
       </div>
       <button
         id="menu-button"
         aria-label={`${menuOpen ? "Close" : "Open"} menu`}
-        aria-expanded={menuOpen ? true : false}
+        aria-expanded={menuOpen}
         aria-controls="menu"
         onClick={toggleMenu} 
-        className="text-2xl w-full py-1"
+        className="text-2xl leading-10 w-full"
         >
-          <span className="inline-block">
-            {menuOpen ? <FaChevronUp /> : <FaChevronDown />}
-          </span>
+        <span className="inline-block">
+          {menuOpen ? <FaChevronUp /> : <FaChevronDown />}
+        </span>
       </button>
     </header>
   )

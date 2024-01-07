@@ -5,7 +5,7 @@ import Button from "../Button"
 const Menu = () => {
   const navigate = useNavigate()
   const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useArticles()
-
+  
   return (
     <nav className="text-sm my-4">
       <section>
