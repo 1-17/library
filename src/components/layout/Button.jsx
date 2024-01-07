@@ -7,7 +7,8 @@ const Button = ({ secondary, ...rest }) => {
     createElement(
       rest.href
         ? "a"
-        : rest.to ? Link
+        : rest.to
+          ? Link
           : "button",
       {
         ...rest,

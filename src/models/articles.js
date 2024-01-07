@@ -1,4 +1,4 @@
-const list = {
+const articles = {
   Components: {
     Layout: [
       {
@@ -46,4 +46,4 @@ const list = {
   }
 }
 
-export default list
+export default articles

@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import { useList } from "../../../hooks"
+import { useArticles } from "../../../hooks"
 import Button from "../Button"
 
 const Menu = () => {
   const navigate = useNavigate()
-  const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useList()
+  const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useArticles()
 
   return (
     <nav className="text-sm my-4">
@@ -39,13 +39,10 @@ const Menu = () => {
             subcategories.map(subcategory =>
               <li key={subcategory}>
                 <Button
-                  secondary
+                  secondary={selectedSubcategory === subcategory}
                   onClick={() => {
                     changeSelectedSubcategory(subcategory)
                     navigate("/")
-                  }}
-                  className={{
-                    "before:content-['★_'] before:whitespace-nowrap": selectedSubcategory === subcategory
                   }}
                   >
                   {subcategory}

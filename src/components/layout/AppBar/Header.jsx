@@ -5,7 +5,7 @@ import Logo from "./Logo"
 import Menu from "./Menu"
 import Credits from "./Credits"
 
-const Mobile = () => {
+const Header = () => {
   const { menuOpen, toggleMenu } = useMobile()
 
   return (
@@ -42,4 +42,4 @@ const Mobile = () => {
   )
 }
 
-export default Mobile
+export default Header

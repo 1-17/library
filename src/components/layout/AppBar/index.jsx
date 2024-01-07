@@ -1,12 +1,12 @@
 import { useMobile } from "../../../hooks"
-import Mobile from "./Mobile"
-import Desktop from "./Desktop"
+import Header from "./Header"
+import Sidebar from "./Sidebar"
 
 const AppBar = () => {
   const { mobile } = useMobile()
 
   return (
-    mobile ? <Mobile /> : <Desktop />
+    mobile ? <Header /> : <Sidebar />
   )
 }
 

@@ -2,7 +2,7 @@ import Logo from "./Logo"
 import Menu from "./Menu"
 import Credits from "./Credits"
 
-const Desktop = () => {
+const Sidebar = () => {
   return (
     <aside className="border-r sticky top-0 flex flex-col justify-around min-w-[260px] h-screen p-4 shadow-md overflow-y-auto">
       <Logo />
@@ -12,4 +12,4 @@ const Desktop = () => {
   )
 }
 
-export default Desktop
+export default Sidebar
