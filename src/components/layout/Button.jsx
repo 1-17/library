@@ -2,7 +2,7 @@ import { createElement } from "react"
 import { Link } from "react-router-dom"
 import classNames from "classnames"
 
-const Button = ({ secondary, ...rest }) => {
+const Button = ({ sm, secondary, ...rest }) => {
   return (
     createElement(
       rest.href
@@ -18,6 +18,7 @@ const Button = ({ secondary, ...rest }) => {
             "block text-center": rest.href || rest.to,
             "bg-light text-dark": !secondary,
             "bg-accent-light text-accent": secondary,
+            "leading-7 sm:leading-8": !sm
           },
           rest.className
         )

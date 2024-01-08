@@ -18,7 +18,7 @@ const ArticlesList = () => {
                 {article.description}
               </p>
             </div>
-            <Button to={article.route} className="leading-7 sm:leading-8">
+            <Button to={article.route}>
               Get code
             </Button>
           </article>

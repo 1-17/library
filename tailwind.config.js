@@ -7,7 +7,7 @@ export default {
         light: "theme(colors.neutral.100)",
         dark: "theme(colors.neutral.700)",
         accent: "theme(colors.purple.500)",
-        "accent-light": "theme(colors.purple.50)"
+        "accent-light": "theme(colors.purple.100)"
       }
     },
   },

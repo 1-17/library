@@ -18,6 +18,7 @@ const Menu = () => {
               <li key={category}>
                 <Button
                   secondary={selectedCategory === category}
+                  sm
                   onClick={() => {
                     changeSelectedCategory(category)
                     navigate("/")
@@ -40,6 +41,7 @@ const Menu = () => {
               <li key={subcategory}>
                 <Button
                   secondary={selectedSubcategory === subcategory}
+                  sm
                   onClick={() => {
                     changeSelectedSubcategory(subcategory)
                     navigate("/")

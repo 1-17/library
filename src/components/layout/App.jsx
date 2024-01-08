@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import AppBar from "./AppBar"
-import NavigationBar from "../articles/NavigationBar"
+import NavigationBar from "../layout/NavigationBar"
 
 const App = () => {
   return (
