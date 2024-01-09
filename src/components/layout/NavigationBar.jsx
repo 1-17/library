@@ -9,7 +9,7 @@ const NavigationBar = () => {
   const articleName = articlePath(pathname)
 
   return (
-    <ul className="bg-light border-b-2 fixed -translate-x-4 -translate-y-16 font-semibold text-md sm:text-lg w-full px-4 py-2 z-10 *:inline">
+    <ul className="bg-light border-b-2 fixed -translate-x-4 -translate-y-16 font-semibold text-md sm:text-lg w-full px-4 py-2 whitespace-nowrap z-10 *:inline">
       <li className="after:content-['_>_']">
         {selectedCategory}
       </li>

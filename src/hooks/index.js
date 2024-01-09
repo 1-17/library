@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { CategoryContext } from "../contexts"
+import { CategoryContext, PopupContext } from "../contexts"
 import { capitalizeString, formatArticleName, revertArticleNameFormat } from "../utils"
 import articles from "../models/articles"
-import TechsBar from "../components/articles/components/TechsBar"
+import CodeSection from "../components/articles/components/CodeSection"
 import EmbedButton from "../components/articles/widgets/EmbedButton"
 
 const useMobile = () => {
@@ -68,7 +68,7 @@ const useArticlesMethods = () => {
         articlesRoutes.push({
           key: formatArticleName(article.name),
           path: route,
-          component: route.includes("components") ? TechsBar : EmbedButton
+          component: route.includes("components") ? CodeSection : EmbedButton
         })
       })
     ))
@@ -99,4 +99,20 @@ const useArticlesMethods = () => {
 
 const useArticles = () => useContext(CategoryContext)
 
-export { useMobile, useArticlesMethods, useArticles }
+const usePopupMethods = () => {
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMessage, setPopupMessage] = useState({ title: "", description: "", cancelButton: null })
+
+  const openPopup = (title, description, cancelButton) => {
+    setPopupOpen(true)
+    setPopupMessage({ title: title, description: description, cancelButton: cancelButton })
+  }
+
+  const closePopup = () => setPopupOpen(false)
+
+  return { popupOpen, popupMessage, openPopup, closePopup }
+}
+
+const usePopup = () => useContext(PopupContext)
+
+export { useMobile, useArticlesMethods, useArticles, usePopupMethods, usePopup }

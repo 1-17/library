@@ -1,14 +1,18 @@
 import { createContext } from "react"
-import { useArticlesMethods } from "../hooks"
+import { useArticlesMethods, usePopupMethods } from "../hooks"
 
 export const CategoryContext = createContext()
+export const PopupContext = createContext()
 
 const Contexts = ({ children }) => {
   const articlesMethods = useArticlesMethods()
+  const popupMethods = usePopupMethods()
 
   return (
     <CategoryContext.Provider value={{ ...articlesMethods }}>
-      {children}
+      <PopupContext.Provider value={{ ...popupMethods }}>
+        {children}
+      </PopupContext.Provider>
     </CategoryContext.Provider>
   )
 }
