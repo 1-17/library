@@ -1,8 +1,11 @@
+import { useArticles } from "../../../../hooks"
 import Button from "../../Button"
 
 const EmbedButton = () => {
+  const { widgetRoute } = useArticles()
+
   return (
-    <Button>
+    <Button to={widgetRoute} target="_blank" rel="noopener noreferrer">
       Get embed link
     </Button>
   )

@@ -1,4 +1,4 @@
-const componentsCodes = {
+const components = {
   link: {
     html: "link html code",
     css: "link css code",
@@ -43,4 +43,4 @@ const componentsCodes = {
   },
 }
 
-export default componentsCodes
+export default components

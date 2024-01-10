@@ -1,6 +1,6 @@
 export const capitalizeString = string => string.charAt(0).toUpperCase() + string.slice(1)
 
-export const formatArticleName = name => name.split(" ").join("_").toLowerCase()
+export const formatToLowerCaseWithUnderscore = name => name.split(" ").join("_").toLowerCase()
 
 export const copyToClipboard = (text, openPopupFunction, okButtonAction) => {
   navigator.clipboard.writeText(text)
