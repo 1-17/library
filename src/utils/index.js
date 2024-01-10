@@ -1,12 +1,9 @@
-const capitalizeString = string => string.charAt(0).toUpperCase() + string.slice(1)
+export const capitalizeString = string => string.charAt(0).toUpperCase() + string.slice(1)
 
-const formatArticleName = name => name.split(" ").join("_").toLowerCase()
-const revertArticleNameFormat = name => name.split("_").join(" ").toLowerCase()
+export const formatArticleName = name => name.split(" ").join("_").toLowerCase()
 
-const copyToClipboard = (text, openPopupFunction) => {
+export const copyToClipboard = (text, openPopupFunction, okButtonAction) => {
   navigator.clipboard.writeText(text)
-    .then(() => openPopupFunction("Success!", "Code copied to clipboard.", true))
-    .catch(() => openPopupFunction("Failed to copy!", "Something went wrong. Please, try again.", true))
+    .then(() => openPopupFunction("Success!", "Code copied to clipboard.", okButtonAction))
+    .catch(() => openPopupFunction("Failed to copy!", "Something went wrong. Please, try again.", okButtonAction))
 }
-
-export { capitalizeString, formatArticleName, revertArticleNameFormat, copyToClipboard }

@@ -3,7 +3,7 @@ import { usePopup } from "../../../../hooks"
 import { copyToClipboard } from "../../../../utils"
 
 const CodeBlock = () => {
-  const { popupOpen, openPopup } = usePopup()
+  const { popupOpen, openPopup, closePopup } = usePopup()
   
   return (
     <div className="bg-dark rounded-xl flex justify-between text-light text-sm max-w-xl">
@@ -21,7 +21,7 @@ const CodeBlock = () => {
         aria-controls="popup"
         aria-haspopup="dialog"
         aria-label="Copy code to clipboard"
-        onClick={() => copyToClipboard(document.getElementById("code").innerHTML, openPopup)}
+        onClick={() => copyToClipboard(document.getElementById("code").innerHTML, openPopup, closePopup)}
         className="text-2xl hover:text-accent h-fit p-4"
         >
         <LuCopy />

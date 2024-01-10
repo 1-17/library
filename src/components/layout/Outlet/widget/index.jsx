@@ -1,4 +1,4 @@
-import Button from "../../layout/Button"
+import Button from "../../Button"
 
 const EmbedButton = () => {
   return (

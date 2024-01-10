@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { CategoryContext, PopupContext } from "../contexts"
-import { capitalizeString, formatArticleName, revertArticleNameFormat } from "../utils"
+import { capitalizeString } from "../utils"
 import articles from "../models/articles"
-import CodeSection from "../components/articles/components/CodeSection"
-import EmbedButton from "../components/articles/widgets/EmbedButton"
 
 const useMobile = () => {
   const checkIfIsMobile = () => window.matchMedia("(max-width: 640px)").matches
@@ -33,12 +31,15 @@ const useArticlesMethods = () => {
 
   const currentArticles = articles[selectedCategory][selectedSubcategory]
 
+  const [selectedArticle, setSelectedArticle] = useState("")
+
   const changeSelectedCategory = newCategory => {
     newCategory = newCategory.toLowerCase()
     
     if (selectedCategory !== newCategory) {
       setSelectedCategory(newCategory)
       setSelectedSubcategory(Object.keys(articles[newCategory])[0])
+      setSelectedArticle("")
     }
   }
   
@@ -47,53 +48,27 @@ const useArticlesMethods = () => {
     
     if (selectedSubcategory !== newSubcategory) {
       setSelectedSubcategory(newSubcategory)
+      setSelectedArticle("")
     }
   }
 
-  const articlesRoutes = []
-  const articlesNames = []
-
-  Object.entries(articles).flatMap(([categories, subcategories]) => (
-    Object.entries(subcategories).flatMap(([subcategory, articles]) => (
-      articles.map(article => {
-        articlesNames.push(article.name)
-        const route = `${categories}/${subcategory}/${formatArticleName(article.name)}`
-
-        currentArticles.map(subcategory => {
-          if (route.includes(formatArticleName(subcategory.name))) {
-            subcategory.route = route
-          }
-        })
-
-        articlesRoutes.push({
-          key: formatArticleName(article.name),
-          path: route,
-          component: route.includes("components") ? CodeSection : EmbedButton
-        })
-      })
-    ))
-  ))
-
-  const articlePath = pathname => {
-    const splittedPathname = pathname.split("/")
-    const articleNameOnPath = splittedPathname[splittedPathname.length - 1]
-    const unformattedArticleName = articlesNames.find(name => (
-      name.toLowerCase() === revertArticleNameFormat(articleNameOnPath)
-    ))
-    
-    return unformattedArticleName
+  const changeSelectedArticle = newArticle => {
+    if (selectedArticle !== newArticle) {
+      setSelectedArticle(newArticle)
+    }
   }
   
   return {
     categories: categories.map(capitalizeString),
     subcategories: subcategories.map(capitalizeString),
     currentArticles,
+    selectedArticle,
     selectedCategory: capitalizeString(selectedCategory),
     selectedSubcategory: capitalizeString(selectedSubcategory),
+    setSelectedArticle,
     changeSelectedCategory,
     changeSelectedSubcategory,
-    articlesRoutes,
-    articlePath
+    changeSelectedArticle
   }
 }
 
@@ -101,16 +76,21 @@ const useArticles = () => useContext(CategoryContext)
 
 const usePopupMethods = () => {
   const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMessage, setPopupMessage] = useState({ title: "", description: "", cancelButton: null })
+  
+  const initialState = { title: "", description: "", okAction: null, cancelAction: null }
+  const [popup, setPopup] = useState(initialState)
 
-  const openPopup = (title, description, cancelButton) => {
+  const openPopup = (title, description, okAction, cancelAction) => {
     setPopupOpen(true)
-    setPopupMessage({ title: title, description: description, cancelButton: cancelButton })
+    setPopup({ title: title, description: description, okAction: okAction, cancelAction: cancelAction })
   }
 
-  const closePopup = () => setPopupOpen(false)
-
-  return { popupOpen, popupMessage, openPopup, closePopup }
+  const closePopup = () => {
+    setPopupOpen(false)
+    setPopup(initialState)
+  }
+  
+  return { popupOpen, popup, openPopup, closePopup }
 }
 
 const usePopup = () => useContext(PopupContext)

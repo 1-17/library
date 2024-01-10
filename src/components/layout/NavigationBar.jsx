@@ -1,12 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom"
 import classNames from "classnames"
 import { useArticles } from "../../hooks"
+import Link from "../../components/layout/Link"
 
 const NavigationBar = () => {
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const { selectedCategory, selectedSubcategory, articlePath } = useArticles()
-  const articleName = articlePath(pathname)
+  const { selectedCategory, selectedSubcategory, selectedArticle, setSelectedArticle } = useArticles()
 
   return (
     <ul className="bg-light border-b-2 fixed -translate-x-4 -translate-y-16 font-semibold text-md sm:text-lg w-full px-4 py-2 whitespace-nowrap z-10 *:inline">
@@ -15,22 +12,22 @@ const NavigationBar = () => {
       </li>
       <li className={classNames(
           {
-            "text-accent": !articleName,
-            "after:content-['_>_']": articleName
+            "text-accent": !selectedArticle,
+            "after:content-['_>_']": selectedArticle
           }
         )}>
         {
-          articleName
-            ? <button onClick={() => navigate("/")} className="hover:text-accent">
+          selectedArticle
+            ? <Link to="/" onClick={() => setSelectedArticle("")} className="hover:text-accent">
                 {selectedSubcategory}
-              </button>
+              </Link>
             : selectedSubcategory
         }
       </li>
       {
-        articleName && (
+        selectedArticle && (
           <li className="text-accent">
-            {articleName}
+            {selectedArticle}
           </li>
         )
       }

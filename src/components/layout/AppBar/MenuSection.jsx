@@ -9,7 +9,7 @@ const MenuSection = ({ title, array, currentElement, changeCurrentElement }) => 
       <h2 className="mb-2">
         {title}
       </h2>
-      <ul className="grid min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
+      <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
         {
           array.map(element =>
             <li key={element}>

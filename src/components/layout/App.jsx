@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom"
-import AppBar from "./AppBar"
 import Popup from "./Popup"
+import AppBar from "./AppBar"
 import NavigationBar from "../layout/NavigationBar"
+import Outlet from "./Outlet"
 
 const App = () => {
   return (

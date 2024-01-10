@@ -4,7 +4,7 @@ import { usePopup } from "../../hooks"
 import Button from "./Button"
 
 const Popup = () => {
-  const { popupOpen, popupMessage, closePopup } = usePopup()
+  const { popupOpen, popup } = usePopup()
 
   return (
     popupOpen && createPortal(
@@ -19,24 +19,24 @@ const Popup = () => {
         >
         <div className="bg-light rounded-xl w-full max-w-sm p-4">
           <h2 id="popup-title" className="font-semibold text-xl sm:text-2xl">
-            {popupMessage.title}
+            {popup.title}
           </h2>
           <p id="popup-description">
-            {popupMessage.description}
+            {popup.description}
           </p>
           <div className={classNames(
             "mt-4 ml-auto",
             {
-              "max-w-32": !popupMessage.cancelButton,
-              "flex max-[250px]:flex-wrap gap-2 max-w-60": popupMessage.cancelButton
+              "max-w-32": !popup.cancelAction,
+              "flex max-[250px]:flex-wrap gap-2 max-w-60": popup.cancelAction
             }
             )}>
-            <Button aria-label="Close popup" onClick={closePopup} variant="filled">
+            <Button onClick={popup.okAction} variant="filled">
               OK
             </Button>
             {
-              popupMessage.cancelButton && (
-                <Button aria-label="Close popup" onClick={closePopup}>
+              popup.cancelAction && (
+                <Button onClick={popup.cancelAction}>
                   Cancel
                 </Button>
               )

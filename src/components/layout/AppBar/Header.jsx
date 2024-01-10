@@ -18,13 +18,13 @@ const Header = () => {
         id="menu"
         role="menu"
         aria-labelledby="menu-button"
-        aria-hidden={menuOpen ? false: true}
+        aria-hidden={!menuOpen}
         className={classNames(
           "transition-all ease-in-out duration-1000",
           {
             "opacity-0 h-0 overflow-hidden": !menuOpen
           }
-          )}
+        )}
         >
         <Menu />
       </div>
