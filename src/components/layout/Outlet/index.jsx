@@ -1,7 +1,7 @@
 import { useArticles } from "../../../hooks"
 import ArticlesList from "./ArticlesList"
-import CodeSection from "./component"
-import EmbedButton from "./widget"
+import CodeSection from "./CodeSection"
+import EmbedButton from "./EmbedButton"
 
 const Outlet = () => {
   const { selectedArticle, selectedCategory } = useArticles()

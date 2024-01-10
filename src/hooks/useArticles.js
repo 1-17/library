@@ -1,7 +1,8 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CategoryContext } from "../contexts"
 import { capitalizeString, formatToLowerCaseWithUnderscore } from "../utils"
 import articles from "../models/articles"
+import components from "../models/components"
 
 export const _useArticlesMethods = () => {
   const categories = Object.keys(articles)
@@ -16,17 +17,17 @@ export const _useArticlesMethods = () => {
 
   const changeSelectedCategory = newCategory => {
     newCategory = newCategory.toLowerCase()
-    
+
     if (selectedCategory !== newCategory) {
       setSelectedCategory(newCategory)
       setSelectedSubcategory(Object.keys(articles[newCategory])[0])
       setSelectedArticle("")
     }
   }
-  
+
   const changeSelectedSubcategory = newSubcategory => {
     newSubcategory = newSubcategory.toLowerCase()
-    
+
     if (selectedSubcategory !== newSubcategory) {
       setSelectedSubcategory(newSubcategory)
       setSelectedArticle("")
@@ -39,11 +40,31 @@ export const _useArticlesMethods = () => {
     }
   }
 
-  const widgetsRoutes = []
+  const [selectedComponentTech, setSelectedComponentTech] = useState("")
+
+  const currentComponent = (selectedCategory === "components" && selectedArticle) && (
+    components.find(component => {
+      const articleId = currentArticles.find(article => article.name === selectedArticle).id
+      return component.id === articleId
+    })
+  )
+  
+  const component = {}
+  component.techs = currentComponent && Object.keys(currentComponent.code)
+  component.code = currentComponent && currentComponent.code[selectedComponentTech]
+  component.selectedTech = selectedComponentTech
+  component.changeSelectedTech = newTech => component.selectedTech !== newTech && setSelectedComponentTech(newTech)
+
+  useEffect(() => {
+    currentComponent && setSelectedComponentTech(component.techs[0])
+  }, [currentComponent])
+
+  const widget = {}
+  widget.routes = []
 
   Object.entries(articles).map(([categories, subcategories]) => {
     categories.includes("widgets") && (
-      widgetsRoutes.push(
+      widget.routes.push(
         ...Object.entries(subcategories).flatMap(([subcategory, articles]) => (
           articles.map(article => (
             {
@@ -56,10 +77,12 @@ export const _useArticlesMethods = () => {
     )
   })
 
-  const widgetRoute = (selectedCategory === "widgets" && selectedArticle) && (
-    widgetsRoutes.find(route => route.path.includes(formatToLowerCaseWithUnderscore(selectedArticle))).path
+  widget.route = (selectedCategory === "widgets" && selectedArticle) && (
+    widget.routes.find(route => (
+      route.path.includes(formatToLowerCaseWithUnderscore(selectedArticle))
+    )).path
   )
-  
+
   return {
     categories: categories.map(capitalizeString),
     subcategories: subcategories.map(capitalizeString),
@@ -71,8 +94,8 @@ export const _useArticlesMethods = () => {
     changeSelectedCategory,
     changeSelectedSubcategory,
     changeSelectedArticle,
-    widgetsRoutes,
-    widgetRoute
+    component,
+    widget
   }
 }
 

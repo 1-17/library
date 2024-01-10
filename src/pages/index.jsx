@@ -3,14 +3,14 @@ import { useArticles } from "../hooks"
 import App from "../components/layout/App"
 
 const Pages = () => {
-  const { widgetsRoutes } = useArticles()
+  const { widget } = useArticles()
 
   return (
     <Router>
       <Routes>
         <Route index element={<App />} />
         {
-          widgetsRoutes.map((route, i) =>
+          widget.routes.map((route, i) =>
             <Route key={i} path={route.path} element={route.element} />
           )
         }
