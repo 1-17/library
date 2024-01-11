@@ -18,7 +18,7 @@ const Popup = () => {
         className="bg-black bg-opacity-50 fixed top-0 left-0 grid place-items-center w-full h-screen p-4 z-50"
         >
         <div className="bg-light rounded-xl w-full max-w-sm p-4">
-          <h2 id="popup-title" className="font-semibold text-xl sm:text-2xl">
+          <h2 id="popup-title" className="font-semibold text-xl sm:text-2xl mb-2">
             {popup.title}
           </h2>
           <p id="popup-description">

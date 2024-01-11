@@ -2,7 +2,7 @@ import { createElement } from "react"
 import { Link } from "react-router-dom"
 import classNames from "classnames"
 
-const Button = ({ variant, size, ...rest }) => {
+const Button = ({ variant, size, external, ...rest }) => {
   return (
     createElement(
       rest.href
@@ -12,6 +12,10 @@ const Button = ({ variant, size, ...rest }) => {
           : "button",
       {
         ...rest,
+        ...external && {
+          target: "_blank",
+          rel: "noopener noreferrer"
+        },
         className: classNames(
           "border border-current rounded-full w-full px-2",
           {

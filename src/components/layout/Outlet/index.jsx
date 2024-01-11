@@ -1,21 +1,21 @@
 import { useArticles } from "../../../hooks"
 import ArticlesList from "./ArticlesList"
-import CodeSection from "./CodeSection"
-import EmbedButton from "./EmbedButton"
+import Component from "./Component"
+import Widget from "./Widget"
 
 const Outlet = () => {
-  const { selectedArticle, selectedCategory } = useArticles()
+  const { articles } = useArticles()
 
-  if (!selectedArticle) {
+  if (!articles.selectedArticle) {
     return <ArticlesList />
   }
   
-  switch (selectedCategory) {
+  switch (articles.selectedCategory) {
     case "Components":
-      return <CodeSection />
+      return <Component />
 
     case "Widgets":
-      return <EmbedButton />
+      return <Widget />
   }
 }
 

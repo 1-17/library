@@ -1,13 +1,38 @@
+import Link from "../components/articles/components/Link"
+
 const components = [
   {
     id: 1,
-    component: "",
+    component: Link,
     code: {
-      html: "link html code",
-      css: "link css code",
-      react: "link react code",
-      react_tailwind: "link react + tailwind code",
-      angular: "link angular code"
+      react: `import { createElement } from "react"
+import { Link as RouterLink } from "react-router-dom"
+
+const Link = ({ external, ...rest }) => {
+  return (
+    <>
+      {" "}
+      {createElement(
+        rest.href ? "a" : RouterLink,
+        {
+          ...rest,
+          ...rest.href && {
+            href: \`https://\${rest.href}\`
+          },
+          ...external &&
+          {
+            target: "_blank",
+            rel: "noopener noreferrer"
+          }
+        }
+      )}
+      {" "}
+    </>
+  )
+}
+
+export default Link
+`
     }
   },
   {

@@ -1,7 +1,7 @@
 import { createElement } from "react"
 import { Link as RouterLink } from "react-router-dom"
 
-const Link = ({ ...rest }) => {
+const Link = ({ external, ...rest }) => {
   return (
     <>
       {" "}
@@ -9,14 +9,17 @@ const Link = ({ ...rest }) => {
         rest.href ? "a" : RouterLink,
         {
           ...rest,
-          ...rest.href &&
+          ...rest.href && {
+            href: `https://${rest.href}`
+          },
+          ...external &&
           {
-            href: `https://${rest.href}`,
             target: "_blank",
             rel: "noopener noreferrer"
           }
         }
       )}
+      {" "}
     </>
   )
 }

@@ -4,7 +4,7 @@ import Button from "../Button"
 
 const Menu = () => {
   const navigate = useNavigate()
-  const { categories, subcategories, selectedCategory, selectedSubcategory, changeSelectedCategory, changeSelectedSubcategory } = useArticles()
+  const { articles } = useArticles()
   
   return (
     <nav className="text-sm my-4 last:*:mt-4">
@@ -14,13 +14,13 @@ const Menu = () => {
         </h2>
         <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
           {
-            categories.map(category =>
+            articles.categories.map(category =>
               <li key={category}>
                 <Button
-                  variant={selectedCategory === category && "primary"}
+                  variant={articles.selectedCategory === category && "primary"}
                   size="sm"
                   onClick={() => {
-                    changeSelectedCategory(category)
+                    articles.changeSelectedCategory(category)
                     navigate("/")
                   }}
                   >
@@ -37,13 +37,13 @@ const Menu = () => {
         </h2>
         <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
           {
-            subcategories.map(subcategory =>
+            articles.subcategories.map(subcategory =>
               <li key={subcategory}>
                 <Button
-                  variant={selectedSubcategory === subcategory && "primary"}
+                  variant={articles.selectedSubcategory === subcategory && "primary"}
                   size="sm"
                   onClick={() => {
-                    changeSelectedSubcategory(subcategory)
+                    articles.changeSelectedSubcategory(subcategory)
                     navigate("/")
                   }}
                   >

@@ -8,7 +8,7 @@ const App = () => {
     <>
       <Popup />
       <AppBar />
-      <main className="grow mt-12 p-4 pb-16 overflow-auto">
+      <main className="grow mt-12 p-4 md:p-8 pt-8 md:pt-10 pb-16 md:pb-20 overflow-auto">
         <NavigationBar />
         <Outlet />
       </main>

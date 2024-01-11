@@ -3,17 +3,19 @@ import { useArticles } from "../hooks"
 import App from "../components/layout/App"
 
 const Pages = () => {
-  const { widget } = useArticles()
+  const { widgets } = useArticles()
 
   return (
     <Router>
       <Routes>
         <Route index element={<App />} />
         {
-          widget.routes.map((route, i) =>
+          widgets.routes.map((route, i) =>
             <Route key={i} path={route.path} element={route.element} />
           )
         }
+        <Route path="example" element="Hi! this is just a route example!" />
+        <Route path="*" element="Route not found!" />
       </Routes>
     </Router>
   )
