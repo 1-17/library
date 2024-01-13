@@ -16,7 +16,7 @@ export const _useArticlesMethods = () => {
   const [selectedArticle, setSelectedArticle] = useState("")
   
   const [selectedComponentTech, setSelectedComponentTech] = useState("")
-
+  
   const changeSelectedCategory = newCategory => {
     newCategory = newCategory.toLowerCase()
 
@@ -87,9 +87,9 @@ export const _useArticlesMethods = () => {
       selectedCategory: capitalizeString(selectedCategory),
       changeSelectedCategory: changeSelectedCategory,
       subcategories: subcategories.map(capitalizeString),
-      selectedSubcategory: capitalizeString(selectedSubcategory),
+      selectedSubcategory: selectedSubcategory && capitalizeString(selectedSubcategory),
       changeSelectedSubcategory: changeSelectedSubcategory,
-      current: currentArticles,
+      current: currentArticles || [],
       selectedArticle: selectedArticle,
       changeSelectedArticle: changeSelectedArticle
     },
