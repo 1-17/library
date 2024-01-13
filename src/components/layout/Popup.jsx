@@ -16,8 +16,8 @@ const Popup = () => {
         aria-describedby="popup-description"
         tabIndex={-1}
         className="bg-black bg-opacity-50 fixed top-0 left-0 grid place-items-center w-full h-screen p-4 z-50"
-        >
-        <div className="bg-light rounded-xl w-full max-w-sm p-4">
+      >
+        <div className="bg-light rounded-shape w-full max-w-sm p-4">
           <h2 id="popup-title" className="font-semibold text-xl sm:text-2xl mb-2">
             {popup.title}
           </h2>
@@ -36,7 +36,7 @@ const Popup = () => {
             </Button>
             {
               popup.cancelAction && (
-                <Button onClick={popup.cancelAction}>
+                <Button onClick={popup.cancelAction} variant="secondary">
                   Cancel
                 </Button>
               )

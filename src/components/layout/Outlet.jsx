@@ -1,7 +1,7 @@
-import { useArticles } from "../../../hooks"
-import ArticlesList from "./ArticlesList"
-import Component from "./Component"
-import Widget from "./Widget"
+import { useArticles } from "../../hooks"
+import ArticlesList from "../articles"
+import Component from "../articles/components"
+import Widget from "../articles/widgets"
 
 const Outlet = () => {
   const { articles } = useArticles()

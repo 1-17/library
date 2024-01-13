@@ -8,6 +8,9 @@ export default {
         dark: "theme(colors.neutral.700)",
         accent: "theme(colors.purple.500)",
         "accent-light": "theme(colors.purple.100)"
+      },
+      borderRadius: {
+        shape: "theme(spacing.3)"
       }
     },
   },

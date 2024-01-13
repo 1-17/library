@@ -14,6 +14,8 @@ export const _useArticlesMethods = () => {
   const currentArticles = articles[selectedCategory][selectedSubcategory]
 
   const [selectedArticle, setSelectedArticle] = useState("")
+  
+  const [selectedComponentTech, setSelectedComponentTech] = useState("")
 
   const changeSelectedCategory = newCategory => {
     newCategory = newCategory.toLowerCase()
@@ -39,9 +41,7 @@ export const _useArticlesMethods = () => {
       setSelectedArticle(newArticle)
     }
   }
-
-  const [selectedComponentTech, setSelectedComponentTech] = useState("")
-
+  
   const currentComponent = (selectedCategory === "components" && selectedArticle) && (
     components.find(component => {
       const articleId = currentArticles.find(article => article.name === selectedArticle).id
@@ -49,20 +49,20 @@ export const _useArticlesMethods = () => {
     })
   )
   
-  const techs = currentComponent && Object.keys(currentComponent.code)
-  const code = currentComponent && currentComponent.code[selectedComponentTech]
-  const component = currentComponent && currentComponent.component
+  const preview = currentComponent && currentComponent.preview
+  const techs = (currentComponent && currentComponent.code) && Object.keys(currentComponent.code)
+  const code = (currentComponent && currentComponent.code) && currentComponent.code[selectedComponentTech]
   const changeSelectedTech = newTech => selectedComponentTech !== newTech && setSelectedComponentTech(newTech)
 
   useEffect(() => {
-    currentComponent && setSelectedComponentTech(techs[0])
+    (currentComponent && techs) && setSelectedComponentTech(techs[0])
   }, [currentComponent])
 
-  const widgetsRoutes = []
+  const widgetRoutes = []
 
   Object.entries(articles).map(([categories, subcategories]) => {
     categories.includes("widgets") && (
-      widgetsRoutes.push(
+      widgetRoutes.push(
         ...Object.entries(subcategories).flatMap(([subcategory, articles]) => (
           articles.map(article => (
             {
@@ -76,7 +76,7 @@ export const _useArticlesMethods = () => {
   })
 
   const widgetRoute = (selectedCategory === "widgets" && selectedArticle) && (
-    widgetsRoutes.find(route => (
+    widgetRoutes.find(route => (
       route.path.includes(formatToLowerCaseWithUnderscore(selectedArticle))
     )).path
   )
@@ -93,15 +93,15 @@ export const _useArticlesMethods = () => {
       selectedArticle: selectedArticle,
       changeSelectedArticle: changeSelectedArticle
     },
-    components: {
+    component: {
+      preview: preview,
       techs: techs,
       code: code,
-      component: component,
       selectedTech: selectedComponentTech,
       changeSelectedTech: changeSelectedTech
     },
-    widgets: {
-      routes: widgetsRoutes,
+    widget: {
+      routes: widgetRoutes,
       route: widgetRoute
     }
   }

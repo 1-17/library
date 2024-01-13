@@ -7,53 +7,40 @@ const Menu = () => {
   const { articles } = useArticles()
   
   return (
-    <nav className="text-sm my-4 last:*:mt-4">
-      <section>
-        <h2 className="mb-2">
-          Categories
-        </h2>
-        <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
-          {
-            articles.categories.map(category =>
-              <li key={category}>
-                <Button
-                  variant={articles.selectedCategory === category && "primary"}
-                  size="sm"
-                  onClick={() => {
-                    articles.changeSelectedCategory(category)
-                    navigate("/")
-                  }}
-                  >
-                  {category}
-                </Button>
-              </li>
-            )
-          }
-        </ul>
-      </section>
-      <section>
-        <h2 className="mb-2">
-          Subcategories
-        </h2>
-        <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
-          {
-            articles.subcategories.map(subcategory =>
-              <li key={subcategory}>
-                <Button
-                  variant={articles.selectedSubcategory === subcategory && "primary"}
-                  size="sm"
-                  onClick={() => {
-                    articles.changeSelectedSubcategory(subcategory)
-                    navigate("/")
-                  }}
-                  >
-                  {subcategory}
-                </Button>
-              </li>
-            )
-          }
-        </ul>
-      </section>
+    <nav className="text-sm my-4 *:mt-4 first:*:mt-0">
+      {
+        [articles.categories, articles.subcategories].map((item, i) => {
+          const title = item === 0 ? "Categories" : "Subcategories"
+          const selectedItem = articles[i === 0 ? "selectedCategory" : "selectedSubcategory"]
+          const changeItem = articles[i === 0 ? "changeSelectedCategory" : "changeSelectedSubcategory"]
+
+          return (
+            <section key={i}>
+              <h2 className="mb-2">
+                {title}
+              </h2>
+              <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
+                {
+                  item.map(listItem =>
+                    <li key={listItem}>
+                      <Button
+                        variant={selectedItem === listItem ? "primary" : "secondary"}
+                        size="sm"
+                        onClick={() => {
+                          changeItem(listItem)
+                          navigate("/")
+                        }}
+                        >
+                        {listItem}
+                      </Button>
+                    </li>
+                  )
+                }
+              </ul>
+            </section>
+          )
+        })
+      }
     </nav>
   )
 }

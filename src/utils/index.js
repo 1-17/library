@@ -14,8 +14,8 @@ export const formatToUpperCaseOrCapitalizeWithPlusSign = string => {
   return capitalizeString(string)
 }
 
-export const copyToClipboard = (text, openPopupFunction, okButtonAction) => {
+export const copyToClipboard = (text, copiedItemName, openPopupFunction, okButtonAction) => {
   navigator.clipboard.writeText(text)
-    .then(() => openPopupFunction("Success!", "Code copied to clipboard.", okButtonAction))
+    .then(() => openPopupFunction("Success!", `${capitalizeString(copiedItemName)} copied to clipboard.`, okButtonAction))
     .catch(() => openPopupFunction("Failed to copy!", "Something went wrong. Please, try again.", okButtonAction))
 }

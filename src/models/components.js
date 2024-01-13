@@ -3,31 +3,28 @@ import Link from "../components/articles/components/Link"
 const components = [
   {
     id: 1,
-    component: Link,
+    preview: Link,
     code: {
       react: `import { createElement } from "react"
 import { Link as RouterLink } from "react-router-dom"
 
 const Link = ({ external, ...rest }) => {
   return (
-    <>
-      {" "}
-      {createElement(
-        rest.href ? "a" : RouterLink,
-        {
-          ...rest,
-          ...rest.href && {
-            href: \`https://\${rest.href}\`
-          },
-          ...external &&
-          {
-            target: "_blank",
-            rel: "noopener noreferrer"
-          }
+    createElement(
+      rest.href ? "a" : RouterLink,
+      {
+        ...rest,
+        ...rest.href && {
+          href: !rest.href.startsWith("https://")
+            ? \`https://\${rest.href}\`
+            : rest.href
+        },
+        ...external && {
+          target: "_blank",
+          rel: "noopener noreferrer"
         }
-      )}
-      {" "}
-    </>
+      }
+    )
   )
 }
 
@@ -37,7 +34,7 @@ export default Link
   },
   {
     id: 2,
-    component: "",
+    preview: "",
     code: {
       html: "button html code",
       css: "button css code",
@@ -48,7 +45,7 @@ export default Link
   },
   {
     id: 3,
-    component: "",
+    preview: "",
     code: {
       html: "header html code",
       css: "header css code",
@@ -59,7 +56,7 @@ export default Link
   },
   {
     id: 4,
-    component: "",
+    preview: "",
     code: {
       html: "form html code",
       css: "form css code",
@@ -70,7 +67,7 @@ export default Link
   },
   {
     id: 5,
-    component: "",
+    preview: "",
     code: {
       html: "field html code",
       css: "field css code",
@@ -81,7 +78,7 @@ export default Link
   },
   {
     id: 6,
-    component: "",
+    preview: "",
     code: {
       html: "stack html code",
       css: "stack css code",

@@ -5,7 +5,7 @@ const articles = {
         id: 1,
         name: "Link",
         cover: "117k",
-        description: "Anchor tag ready for external links or route links."
+        description: "Anchor tag ready for external links and route links that can be opened in a new tab."
       },
       {
         id: 2,
@@ -80,7 +80,7 @@ const articles = {
         name: "Test 6",
         cover: "117k",
         description: "Deserunt sunt enim qui elit irure in."
-      },
+      }
     ]
   }
 }

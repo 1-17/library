@@ -25,7 +25,7 @@ const Header = () => {
             "opacity-0 h-0 overflow-hidden": !menuOpen
           }
         )}
-        >
+      >
         <Menu />
       </div>
       <button
@@ -35,7 +35,7 @@ const Header = () => {
         aria-controls="menu"
         onClick={toggleMenu} 
         className="text-2xl leading-10 w-full"
-        >
+      >
         <span className="inline-block">
           {menuOpen ? <FaChevronUp /> : <FaChevronDown />}
         </span>

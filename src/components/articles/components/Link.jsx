@@ -7,16 +7,16 @@ const Link = () => {
   return (
     <div className="*:mb-2 last:*:mb-0">
       <p>
-        <LinkComponent href={website} external className="font-semibold underline">
+        <LinkComponent href={website} external className="font-semibold hover:text-accent underline">
           Click here
         </LinkComponent>
-        to open <span className="italic">{website}</span> on a new tab.
+        {""} to open <span className="italic">{website}</span> on a new tab.
       </p>
       <p>
-        <LinkComponent to={route} className="font-semibold underline">
+        <LinkComponent to={route} className="font-semibold hover:text-accent underline">
           Click here
         </LinkComponent>
-        to open a route of this app on this tab.
+        {""} to open a route of this app on this tab.
       </p>
     </div>
   )
