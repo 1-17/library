@@ -1,55 +1,61 @@
-import { LuCopy } from "react-icons/lu"
+import { Fragment } from "react"
 import classNames from "classnames"
-import { useArticles, usePopup } from "../../../hooks"
-import { copyToClipboard, formatToUpperCaseOrCapitalizeWithPlusSign } from "../../../utils"
+import { useArticles } from "../../../hooks"
+import { formatTechName } from "../../../utils"
 import Button from "../../layout/Button"
+import CodeBox from "../../layout/CodeBox"
 
 const Component = () => {
   const { component } = useArticles()
-  const { openPopup, closePopup } = usePopup()
-
+  
   return (
-    <div className="max-w-2xl">
-      <div className="border rounded-shape p-4 shadow-md">
-        {
-          component.preview
-            ? <component.preview />
-            : (
-              <span>
-                Preview not available.
-              </span>
-            )
-        }
-      </div>
-      <nav className="mt-8">
-        <ul className="flex text-sm mb-2 pb-2 whitespace-nowrap overflow-auto">
+    <>
+      <section>
+        <h2 className="font-semibold text-lg sm:text-xl mb-4">
+          Preview
+        </h2>
+        <div className="border rounded-shape p-4 shadow-md">
           {
-            component.techs.map((tech, i) =>
-              <li key={i}>
-                <Button
-                  onClick={() => component.changeSelectedTech(tech)}
-                  variant={component.selectedTech === tech ? "primary" : "secondary"}
-                  className={classNames(
-                    "rounded-none px-4",
-                    {
-                      "border-l-0": component.selectedTech !== tech && i !== 0,
-                      "border-r-0": component.selectedTech !== tech && i === component.techs.indexOf(component.selectedTech) - 1,
-                      "rounded-l-full": i === 0,
-                      "rounded-r-full": i === component.techs.length - 1
-                    }
-                  )}
-                >
-                  {formatToUpperCaseOrCapitalizeWithPlusSign(tech)}
-                </Button>
-              </li>
-            )
+            component.preview
+              ? <component.preview />
+              : <span>
+                  Preview not available.
+                </span>
           }
-        </ul>
-      </nav>
-      <div className="bg-dark rounded-shape flex justify-between text-light text-sm">
-        <pre className="w-full p-4 overflow-auto">
-          <code>
-            <ol id="code-list" className="list-decimal marker:text-accent ml-8">
+        </div>
+      </section>
+      <section>
+        <h2 className="font-semibold text-lg sm:text-xl mb-4">
+          Codes
+        </h2>
+        <nav>
+          <ul className="flex text-sm mb-2 pb-2 whitespace-nowrap overflow-auto">
+            {
+              component.techs.map((tech, i) =>
+                <li key={i}>
+                  <Button
+                    onClick={() => component.changeSelectedTech(tech)}
+                    variant={component.selectedTech === tech ? "primary" : "secondary"}
+                    className={classNames(
+                      "rounded-none px-4",
+                      {
+                        "border-l-0": component.selectedTech !== tech && i !== 0,
+                        "border-r-0": component.selectedTech !== tech && i === component.techs.indexOf(component.selectedTech) - 1,
+                        "rounded-l-full": i === 0,
+                        "rounded-r-full": i === component.techs.length - 1
+                      }
+                    )}
+                  >
+                    {formatTechName(tech)}
+                  </Button>
+                </li>
+              )
+            }
+          </ul>
+        </nav>
+        <div className="*:mt-4 first:*:mt-0">
+          <CodeBox component>
+            <ul className="list-decimal marker:text-accent ml-8">
               {
                 component.code.split("\n").map((line, i) => (
                   <li key={i}>
@@ -57,23 +63,26 @@ const Component = () => {
                   </li>
                 ))
               }
-            </ol>
-          </code>
-        </pre>
-        <Button
-          popupTrigger
-          aria-label="Copy code to clipboard"
-          onClick={() => {
-            const codeList = Array.from(document.querySelectorAll("#code-list li"))
-            const codeText = codeList.map(list => list.textContent).join("\n")
-            copyToClipboard(codeText, "Code", openPopup, closePopup)
-          }}
-          className="text-2xl hover:text-accent h-fit p-4"
-        >
-          <LuCopy />
-        </Button>
-      </div>
-    </div>
+            </ul>
+          </CodeBox>
+          {
+            component.usage && (
+              typeof component.usage === "string"
+                ? <CodeBox>
+                    {component.usage}
+                  </CodeBox>
+                : component.usage.map((usage, i) =>
+                    <Fragment key={i}>
+                      <CodeBox>
+                        {usage}
+                      </CodeBox>
+                    </Fragment>
+                  )
+            )
+          }
+        </div>
+      </section>
+    </>
   )
 }
 

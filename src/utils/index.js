@@ -1,9 +1,9 @@
 export const capitalizeString = string => string.charAt(0).toUpperCase() + string.slice(1)
 
-export const formatToLowerCaseWithUnderscore = string => string.split(" ").join("_").toLowerCase()
+export const formatArticleNameToRoutePath = string => string.split(" ").join("_").toLowerCase()
 
-export const formatToUpperCaseOrCapitalizeWithPlusSign = string => {
-  if (string === "html" || string === "css") {
+export const formatTechName = string => {
+  if (["html", "css"].includes(string)) {
     return string.toUpperCase()
   }
 
@@ -12,10 +12,4 @@ export const formatToUpperCaseOrCapitalizeWithPlusSign = string => {
   }
 
   return capitalizeString(string)
-}
-
-export const copyToClipboard = (text, copiedItemName, openPopupFunction, okButtonAction) => {
-  navigator.clipboard.writeText(text)
-    .then(() => openPopupFunction("Success!", `${capitalizeString(copiedItemName)} copied to clipboard.`, okButtonAction))
-    .catch(() => openPopupFunction("Failed to copy!", "Something went wrong. Please, try again.", okButtonAction))
 }

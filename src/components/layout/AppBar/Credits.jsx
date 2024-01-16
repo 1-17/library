@@ -2,10 +2,10 @@ import Link from "../Link"
 
 const Credits = () => {
   return (
-    <p className="text-xs sm:text-center whitespace-nowrap">
+    <p className="text-sm sm:text-center whitespace-nowrap">
       Made by {""}
-      <Link href="github.com/1-17" external className="font-bold text-accent">
-        117k
+      <Link href="github.com/1-17" external className="text-accent">
+        <span className="font-bold">117k</span>
       </Link>
     </p>
   )

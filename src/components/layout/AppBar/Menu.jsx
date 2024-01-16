@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom"
 import { useArticles } from "../../../hooks"
 import Button from "../Button"
 
 const Menu = () => {
-  const navigate = useNavigate()
   const { articles } = useArticles()
   
   return (
@@ -20,24 +18,24 @@ const Menu = () => {
                   <h2 className="mb-2">
                     {title}
                   </h2>
-                  <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
-                    {
-                      item.map(listItem =>
-                        <li key={listItem}>
-                          <Button
-                            variant={selectedItem === listItem ? "primary" : "secondary"}
-                            size="sm"
-                            onClick={() => {
-                              changeItem(listItem)
-                              navigate("/")
-                            }}
-                            >
-                            {listItem}
-                          </Button>
-                        </li>
-                      )
-                    }
-                  </ul>
+                  <nav>
+                    <ul className="grid min-[260px]:grid-cols-2 min-[360px]:grid-cols-3 sm:grid-cols-2 gap-2">
+                      {
+                        item.map(listItem =>
+                          <li key={listItem}>
+                            <Button
+                              to="/"
+                              onClick={() => changeItem(listItem)}
+                              variant={selectedItem === listItem ? "primary" : "secondary"}
+                              size="sm"
+                              >
+                              {listItem}
+                            </Button>
+                          </li>
+                        )
+                      }
+                    </ul>
+                  </nav>
                 </section>
               : null
           )

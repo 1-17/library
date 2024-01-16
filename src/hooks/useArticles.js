@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { CategoryContext } from "../contexts"
-import { capitalizeString, formatToLowerCaseWithUnderscore } from "../utils"
+import { capitalizeString, formatArticleNameToRoutePath } from "../utils"
 import articles from "../models/articles"
 import components from "../models/components"
 
@@ -50,8 +50,10 @@ export const _useArticlesMethods = () => {
   )
   
   const preview = currentComponent && currentComponent.preview
-  const techs = (currentComponent && currentComponent.code) && Object.keys(currentComponent.code)
-  const code = (currentComponent && currentComponent.code) && currentComponent.code[selectedComponentTech]
+  const codes = currentComponent && currentComponent.codes
+  const techs = codes && Object.keys(currentComponent.codes.component)
+  const code = techs && currentComponent.codes.component[selectedComponentTech]
+  const usage = codes && currentComponent.codes.usage
   const changeSelectedTech = newTech => selectedComponentTech !== newTech && setSelectedComponentTech(newTech)
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export const _useArticlesMethods = () => {
         ...Object.entries(subcategories).flatMap(([subcategory, articles]) => (
           articles.map(article => (
             {
-              path: `${categories}/${subcategory}/${formatToLowerCaseWithUnderscore(article.name)}`,
+              path: `${categories}/${subcategory}/${formatArticleNameToRoutePath(article.name)}`,
               element: article.name
             }
           ))
@@ -77,7 +79,7 @@ export const _useArticlesMethods = () => {
 
   const widgetRoute = (selectedCategory === "widgets" && selectedArticle) && (
     widgetRoutes.find(route => (
-      route.path.includes(formatToLowerCaseWithUnderscore(selectedArticle))
+      route.path.includes(formatArticleNameToRoutePath(selectedArticle))
     )).path
   )
   
@@ -85,20 +87,21 @@ export const _useArticlesMethods = () => {
     articles: {
       categories: categories.map(capitalizeString),
       selectedCategory: capitalizeString(selectedCategory),
-      changeSelectedCategory: changeSelectedCategory,
+      changeSelectedCategory,
       subcategories: subcategories.map(capitalizeString),
       selectedSubcategory: selectedSubcategory && capitalizeString(selectedSubcategory),
-      changeSelectedSubcategory: changeSelectedSubcategory,
+      changeSelectedSubcategory,
       current: currentArticles || [],
-      selectedArticle: selectedArticle,
-      changeSelectedArticle: changeSelectedArticle
+      selectedArticle,
+      changeSelectedArticle
     },
     component: {
-      preview: preview,
-      techs: techs,
-      code: code,
+      preview,
+      techs,
+      code,
+      usage,
       selectedTech: selectedComponentTech,
-      changeSelectedTech: changeSelectedTech
+      changeSelectedTech
     },
     widget: {
       routes: widgetRoutes,

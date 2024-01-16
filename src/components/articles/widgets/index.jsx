@@ -1,27 +1,25 @@
 import { useArticles, usePopup } from "../../../hooks"
-import { copyToClipboard } from "../../../utils"
 import Button from "../../layout/Button"
 
 const Widget = () => {
   const { widget, articles } = useArticles()
-  const { openPopup, closePopup } = usePopup()
+  const { copyToClipboard } = usePopup()
 
   return (
     <>
       <Button
         popupTrigger
-        onClick={() => copyToClipboard(widget.route, "Widget link", openPopup, closePopup)}
+        onClick={() => copyToClipboard(document.location.href + widget.route, "Widget link")}
         variant="secondary"
-        external
       >
         Get embed link
       </Button>
       {
         articles.selectedSubcategory === "Notion" && (
-          <div className="mt-8">
-            <h3 className="font-semibold text-lg">
+          <div className="mt-6">
+            <h2 className="font-semibold text-lg sm:text-xl mb-1">
               How to use:
-            </h3>
+            </h2>
             <p>In exercitation elit cupidatat officia adipisicing.</p>
           </div>
         )

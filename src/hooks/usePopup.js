@@ -1,23 +1,23 @@
 import { useContext, useState } from "react"
 import { PopupContext } from "../contexts"
+import { capitalizeString } from "../utils"
 
 export const _usePopupMethods = () => {
-  const [popupOpen, setPopupOpen] = useState(false)
-  
-  const initialState = { title: "", description: "", okAction: null, cancelAction: null }
-  const [popup, setPopup] = useState(initialState)
+  const [popup, setPopup] = useState("")
 
   const openPopup = (title, description, okAction, cancelAction) => {
-    setPopupOpen(true)
-    setPopup({ title: title, description: description, okAction: okAction, cancelAction: cancelAction })
+    setPopup({ title, description, okAction, cancelAction })
   }
 
-  const closePopup = () => {
-    setPopupOpen(false)
-    setPopup(initialState)
+  const closePopup = () => setPopup("")
+
+  const copyToClipboard = (text, copiedItemName) => {
+    navigator.clipboard.writeText(text)
+      .then(() => openPopup("Success!", `${capitalizeString(copiedItemName)} copied to clipboard.`, closePopup))
+      .catch(() => openPopup("Failed to copy!", "Something went wrong. Please, try again.", closePopup))
   }
   
-  return { popupOpen, popup, openPopup, closePopup }
+  return { popup, copyToClipboard }
 }
 
 export const _usePopup = () => useContext(PopupContext)

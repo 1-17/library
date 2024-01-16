@@ -18,7 +18,10 @@ const ArticlesList = () => {
                 {article.description}
               </p>
             </div>
-            <Button onClick={() => articles.changeSelectedArticle(article.name)} variant="secondary">
+            <Button
+              onClick={() => articles.changeSelectedArticle(article.name)}
+              variant="secondary"
+            >
               {
                 articles.selectedCategory === "Components"
                   ? "Get code"

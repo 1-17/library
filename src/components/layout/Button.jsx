@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { usePopup } from "../../hooks"
 
 const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
-  const { popupOpen } = usePopup()
+  const { popup } = usePopup()
 
   return (
     createElement(
@@ -15,12 +15,15 @@ const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
           : "button",
       {
         ...rest,
+        ...rest.to && {
+          role: "button"
+        },
         ...external && {
           target: "_blank",
           rel: "noopener noreferrer"
         },
         ...popupTrigger && {
-          "aria-expanded": popupOpen,
+          "aria-expanded": popup !== "",
           "aria-controls": "popup",
           "aria-haspopup": "dialog"
         },

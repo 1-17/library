@@ -48,38 +48,6 @@ const articles = {
         name: "Typography",
         cover: "117k",
         description: "Deserunt sunt enim qui elit irure in."
-      },
-      {
-        id: 8,
-        name: "Test 1",
-        cover: "117k",
-        description: "Deserunt sunt enim qui elit irure in."
-      },
-      {
-        id: 9,
-        name: "Test 3",
-        cover: "117k",
-        description: "Deserunt sunt enim qui elit irure in."
-      }
-    ],
-    other: [
-      {
-        id: 10,
-        name: "Test 4",
-        cover: "117k",
-        description: "Deserunt sunt enim qui elit irure in."
-      },
-      {
-        id: 11,
-        name: "Test 5",
-        cover: "117k",
-        description: "Deserunt sunt enim qui elit irure in."
-      },
-      {
-        id: 12,
-        name: "Test 6",
-        cover: "117k",
-        description: "Deserunt sunt enim qui elit irure in."
       }
     ]
   }

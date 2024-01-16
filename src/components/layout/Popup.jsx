@@ -4,10 +4,10 @@ import { usePopup } from "../../hooks"
 import Button from "./Button"
 
 const Popup = () => {
-  const { popupOpen, popup } = usePopup()
+  const { popup } = usePopup()
 
   return (
-    popupOpen && createPortal(
+    popup && createPortal(
       <div
         id="popup"
         role="dialog"

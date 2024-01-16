@@ -10,12 +10,12 @@ const Articles = () => {
   if (articles.current.length && !articles.selectedArticle) {
     return <ArticlesList />
   }
-
+  
   if (articles.selectedCategory === "Components" && component.code) {
     return <Component />
   }
 
-  if (articles.selectedCategory === "Widgets" && widget.component) {
+  if (articles.selectedCategory === "Widgets") {
     return <Widget />
   }
   
