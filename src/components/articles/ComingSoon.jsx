@@ -3,7 +3,7 @@ import { useArticles } from "../../hooks"
 import Card from "../layout/Card"
 
 const ComingSoon = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
 
   return (
     <Card

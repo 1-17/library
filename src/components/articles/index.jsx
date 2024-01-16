@@ -1,11 +1,11 @@
 import { useArticles } from "../../hooks"
 import ArticlesList from "./ArticlesList"
-import Component from "./components/Component"
-import Widget from "./widgets/Widget"
+import Component from "./Component"
+import Widget from "./Widget"
 import ComingSoon from "./ComingSoon"
 
 const Articles = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
   
   if (articles.current.length && !articles.selectedArticle) {
     return <ArticlesList />

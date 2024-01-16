@@ -1,11 +1,11 @@
 import classNames from "classnames"
-import { useArticles } from "../../../hooks"
-import { formatTechName } from "../../../utils"
-import Button from "../../layout/Button"
-import CodeBox from "../../layout/CodeBox"
+import { useArticles } from "../../hooks"
+import { formatTechName } from "../../utils"
+import Button from "../layout/Button"
+import CodeBox from "../layout/CodeBox"
 
 const Component = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
   
   return (
     <>

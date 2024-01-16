@@ -2,7 +2,7 @@ import { useArticles } from "../../../hooks"
 import Button from "../Button"
 
 const Menu = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
   
   return (
     <nav className="text-sm my-4 *:mt-4 first:*:mt-0">

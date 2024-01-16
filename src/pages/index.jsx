@@ -6,7 +6,7 @@ import Example from "./Example"
 import NotFound from "./NotFound"
 
 const Pages = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
 
   return (
     <Router>

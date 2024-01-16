@@ -1,8 +1,8 @@
-import { useArticles, usePopup } from "../../../hooks"
-import Button from "../../layout/Button"
+import { useArticles, usePopup } from "../../hooks"
+import Button from "../layout/Button"
 
 const Widget = () => {
-  const { articles } = useArticles()
+  const articles = useArticles()
   const { copyToClipboard } = usePopup()
 
   return (

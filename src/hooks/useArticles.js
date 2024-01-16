@@ -81,19 +81,17 @@ export const _useArticlesMethods = () => {
   )
   
   return {
-    articles: {
-      categories: categories.map(capitalizeString),
-      selectedCategory: capitalizeString(selectedCategory),
-      changeSelectedCategory,
-      subcategories: subcategories.map(capitalizeString),
-      selectedSubcategory: selectedSubcategory && capitalizeString(selectedSubcategory),
-      changeSelectedSubcategory,
-      current: currentArticles || [],
-      selectedArticle,
-      changeSelectedArticle,
-      component,
-      widget
-    }
+    categories: categories.map(capitalizeString),
+    selectedCategory: capitalizeString(selectedCategory),
+    changeSelectedCategory,
+    subcategories: subcategories.map(capitalizeString),
+    selectedSubcategory: selectedSubcategory && capitalizeString(selectedSubcategory),
+    changeSelectedSubcategory,
+    current: currentArticles || [],
+    selectedArticle,
+    changeSelectedArticle,
+    component,
+    widget
   }
 }
 

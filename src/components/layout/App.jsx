@@ -8,7 +8,7 @@ import Link from "./Link"
 
 const App = () => {
   const { pathname } = useLocation()
-  const { articles } = useArticles()
+  const articles = useArticles()
 
   return (
     <>
