@@ -5,9 +5,9 @@ import { capitalizeString } from "../utils"
 export const _usePopupMethods = () => {
   const [popup, setPopup] = useState("")
 
-  const openPopup = (title, description, okAction, cancelAction) => {
+  const openPopup = (title, description, okAction, cancelAction) => (
     setPopup({ title, description, okAction, cancelAction })
-  }
+  )
 
   const closePopup = () => setPopup("")
 

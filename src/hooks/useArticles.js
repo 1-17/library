@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import { CategoryContext } from "../contexts"
 import { capitalizeString, formatArticleNameToRoutePath } from "../utils"
 import articles from "../models/articles"
-import components from "../models/components"
 
 export const _useArticlesMethods = () => {
   const categories = Object.keys(articles)
@@ -14,7 +13,7 @@ export const _useArticlesMethods = () => {
   const currentArticles = articles[selectedCategory][selectedSubcategory]
 
   const [selectedArticle, setSelectedArticle] = useState("")
-  
+
   const [selectedComponentTech, setSelectedComponentTech] = useState("")
   
   const changeSelectedCategory = newCategory => {
@@ -41,35 +40,35 @@ export const _useArticlesMethods = () => {
       setSelectedArticle(newArticle)
     }
   }
-  
-  const currentComponent = (selectedCategory === "components" && selectedArticle) && (
-    components.find(component => {
-      const articleId = currentArticles.find(article => article.name === selectedArticle).id
-      return component.id === articleId
-    })
+
+  const currentComponent = (selectedCategory === "components" && selectedSubcategory && selectedArticle) && (
+    articles.components[selectedSubcategory].find(article => article.name === selectedArticle)
   )
-  
-  const preview = currentComponent && currentComponent.preview
-  const codes = currentComponent && currentComponent.codes
-  const techs = codes && Object.keys(currentComponent.codes.component)
-  const code = techs && currentComponent.codes.component[selectedComponentTech]
-  const usage = codes && currentComponent.codes.usage
-  const changeSelectedTech = newTech => selectedComponentTech !== newTech && setSelectedComponentTech(newTech)
+
+  const component = {}
+
+  component.preview = currentComponent && currentComponent.preview
+  component.techs = (currentComponent && currentComponent.codes && currentComponent.codes.component) && Object.keys(currentComponent.codes.component)
+  component.selectedTech = selectedComponentTech
+  component.changeSelectedTech = newTech => selectedComponentTech !== newTech && setSelectedComponentTech(newTech)
+  component.code = component.techs && currentComponent.codes.component[selectedComponentTech]
+  component.usage = (currentComponent && currentComponent.codes) && currentComponent.codes.usage
 
   useEffect(() => {
-    (currentComponent && techs) && setSelectedComponentTech(techs[0])
+    (currentComponent && component.techs) && setSelectedComponentTech(component.techs[0])
   }, [currentComponent])
 
-  const widgetRoutes = []
+  const widget = {}
+  widget.routes = []
 
   Object.entries(articles).map(([categories, subcategories]) => {
     categories.includes("widgets") && (
-      widgetRoutes.push(
+      widget.routes.push(
         ...Object.entries(subcategories).flatMap(([subcategory, articles]) => (
-          articles.map(article => (
+          articles.map((article, i) => (
             {
-              path: `${categories}/${subcategory}/${formatArticleNameToRoutePath(article.name)}`,
-              element: article.name
+              key: i,
+              path: `${categories}/${subcategory}/${formatArticleNameToRoutePath(article.name)}`
             }
           ))
         ))
@@ -77,10 +76,8 @@ export const _useArticlesMethods = () => {
     )
   })
 
-  const widgetRoute = (selectedCategory === "widgets" && selectedArticle) && (
-    widgetRoutes.find(route => (
-      route.path.includes(formatArticleNameToRoutePath(selectedArticle))
-    )).path
+  widget.route = (selectedCategory === "widgets" && selectedArticle) && (
+    document.location.href + widget.routes.find(route => route.path.includes(formatArticleNameToRoutePath(selectedArticle))).path
   )
   
   return {
@@ -93,19 +90,9 @@ export const _useArticlesMethods = () => {
       changeSelectedSubcategory,
       current: currentArticles || [],
       selectedArticle,
-      changeSelectedArticle
-    },
-    component: {
-      preview,
-      techs,
-      code,
-      usage,
-      selectedTech: selectedComponentTech,
-      changeSelectedTech
-    },
-    widget: {
-      routes: widgetRoutes,
-      route: widgetRoute
+      changeSelectedArticle,
+      component,
+      widget
     }
   }
 }

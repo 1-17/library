@@ -9,7 +9,15 @@ const ArticlesList = () => {
       {
         articles.current.map(article =>
           <article key={article.name}>
-            <img src={`src/assets/img/${article.cover}.png`} alt={article.name} />
+            <div className="border rounded-shape grid place-items-center p-4 shadow-md aspect-video">
+              {
+                article.cover
+                  ? <article.cover />
+                  : <span>
+                      Cover not available.
+                    </span>
+              }
+            </div>
             <div className="my-3">
               <h3 className="font-semibold text-md sm:text-lg">
                 {article.name}

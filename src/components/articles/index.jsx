@@ -1,21 +1,21 @@
 import { useArticles } from "../../hooks"
 import ArticlesList from "./ArticlesList"
-import Component from "./components"
-import Widget from "./widgets"
+import Component from "./components/Component"
+import Widget from "./widgets/Widget"
 import ComingSoon from "./ComingSoon"
 
 const Articles = () => {
-  const { articles, component, widget } = useArticles()
+  const { articles } = useArticles()
   
   if (articles.current.length && !articles.selectedArticle) {
     return <ArticlesList />
   }
   
-  if (articles.selectedCategory === "Components" && component.code) {
+  if (articles.selectedCategory === "Components" && articles.component.code) {
     return <Component />
   }
 
-  if (articles.selectedCategory === "Widgets") {
+  if (articles.selectedCategory === "Widgets" && articles.widget.route) {
     return <Widget />
   }
   

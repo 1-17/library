@@ -16,24 +16,23 @@ const App = () => {
       <AppBar />
       <main className="grow mt-12 md:mt-14 p-4 md:p-8 pt-8 md:pt-10 pb-16 md:pb-20 overflow-auto">
         <Breadcrumb />
-        <div {...(articles.selectedArticle || pathname !== "/") && { className: "max-w-2xl *:mt-8 first:*:mt-0" }}>
-          <Outlet />
-          {
-            (articles.selectedArticle || pathname !== "/") && (
-              <Link
-                to="/"
-                onClick={() => {
-                  articles.selectedArticle && articles.changeSelectedArticle("")
-                  pathname === "example" && articles.changeSelectedArticle("Link")
-                }}
-                className="inline-block text-xl"
-              >
-                <FaArrowLeft className="inline align-sub mr-3" />
-                Go back
-              </Link>
-            )
-          }
-        </div>
+        {
+          (articles.selectedArticle || pathname !== "/")
+            ? <div className="max-w-2xl *:mt-8 first:*:mt-0">
+                <Outlet />
+                <Link
+                  to="/"
+                  onClick={() =>
+                    articles.selectedArticle && articles.changeSelectedArticle("")
+                  }
+                  className="inline-block text-xl"
+                >
+                  <FaArrowLeft className="inline align-sub mr-3" />
+                  Go back
+                </Link>
+              </div>
+            : <Outlet />
+        }
       </main>
     </>
   )

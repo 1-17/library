@@ -2,14 +2,14 @@ import { useArticles, usePopup } from "../../../hooks"
 import Button from "../../layout/Button"
 
 const Widget = () => {
-  const { widget, articles } = useArticles()
+  const { articles } = useArticles()
   const { copyToClipboard } = usePopup()
 
   return (
     <>
       <Button
         popupTrigger
-        onClick={() => copyToClipboard(document.location.href + widget.route, "Widget link")}
+        onClick={() => copyToClipboard(articles.widget.route, "Widget link")}
         variant="secondary"
       >
         Get embed link

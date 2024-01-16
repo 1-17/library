@@ -2,15 +2,15 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa"
 import classNames from "classnames"
 import { useMobile } from "../../../hooks"
 import Logo from "./Logo"
-import Menu from "./Menu"
 import Credits from "./Credits"
+import Menu from "./Menu"
 
 const Header = () => {
   const { menuOpen, toggleMenu } = useMobile()
 
   return (
     <header className="bg-light border-b-2 sticky top-0 px-4 pt-4 z-10">
-      <div className="flex justify-between items-baseline gap-4">
+      <div className="flex justify-between items-baseline gap-4 overflow-auto">
         <Logo />
         <Credits />
       </div>

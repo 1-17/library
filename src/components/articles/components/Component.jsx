@@ -1,4 +1,3 @@
-import { Fragment } from "react"
 import classNames from "classnames"
 import { useArticles } from "../../../hooks"
 import { formatTechName } from "../../../utils"
@@ -6,7 +5,7 @@ import Button from "../../layout/Button"
 import CodeBox from "../../layout/CodeBox"
 
 const Component = () => {
-  const { component } = useArticles()
+  const { articles } = useArticles()
   
   return (
     <>
@@ -16,8 +15,10 @@ const Component = () => {
         </h2>
         <div className="border rounded-shape p-4 shadow-md">
           {
-            component.preview
-              ? <component.preview />
+            articles.component.preview
+              ? typeof articles.component.preview === "string"
+                  ? articles.component.preview
+                  : <articles.component.preview />
               : <span>
                   Preview not available.
                 </span>
@@ -31,18 +32,18 @@ const Component = () => {
         <nav>
           <ul className="flex text-sm mb-2 pb-2 whitespace-nowrap overflow-auto">
             {
-              component.techs.map((tech, i) =>
+              articles.component.techs.map((tech, i) =>
                 <li key={i}>
                   <Button
-                    onClick={() => component.changeSelectedTech(tech)}
-                    variant={component.selectedTech === tech ? "primary" : "secondary"}
+                    onClick={() => articles.component.changeSelectedTech(tech)}
+                    variant={articles.component.selectedTech === tech ? "primary" : "secondary"}
                     className={classNames(
                       "rounded-none px-4",
                       {
-                        "border-l-0": component.selectedTech !== tech && i !== 0,
-                        "border-r-0": component.selectedTech !== tech && i === component.techs.indexOf(component.selectedTech) - 1,
+                        "border-l-0": articles.component.selectedTech !== tech && i !== 0,
+                        "border-r-0": articles.component.selectedTech !== tech && i === articles.component.techs.indexOf(articles.component.selectedTech) - 1,
                         "rounded-l-full": i === 0,
-                        "rounded-r-full": i === component.techs.length - 1
+                        "rounded-r-full": i === articles.component.techs.length - 1
                       }
                     )}
                   >
@@ -57,7 +58,7 @@ const Component = () => {
           <CodeBox component>
             <ul className="list-decimal marker:text-accent ml-8">
               {
-                component.code.split("\n").map((line, i) => (
+                articles.component.code.split("\n").map((line, i) => (
                   <li key={i}>
                     {line}
                   </li>
@@ -66,17 +67,15 @@ const Component = () => {
             </ul>
           </CodeBox>
           {
-            component.usage && (
-              typeof component.usage === "string"
+            articles.component.usage && (
+              typeof articles.component.usage === "string"
                 ? <CodeBox>
-                    {component.usage}
+                    {articles.component.usage}
                   </CodeBox>
-                : component.usage.map((usage, i) =>
-                    <Fragment key={i}>
-                      <CodeBox>
-                        {usage}
-                      </CodeBox>
-                    </Fragment>
+                : articles.component.usage.map((usage, i) =>
+                    <CodeBox key={i}>
+                      {usage}
+                    </CodeBox>
                   )
             )
           }

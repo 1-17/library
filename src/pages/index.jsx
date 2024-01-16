@@ -6,7 +6,7 @@ import Example from "./Example"
 import NotFound from "./NotFound"
 
 const Pages = () => {
-  const { widget } = useArticles()
+  const { articles } = useArticles()
 
   return (
     <Router>
@@ -17,8 +17,8 @@ const Pages = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
         {
-          widget.routes.map((route, i) =>
-            <Route key={i} path={route.path} element={route.element} />
+          articles.widget.routes.map(route =>
+            <Route key={route.key} path={route.path} />
           )
         }
       </Routes>
