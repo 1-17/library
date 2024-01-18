@@ -6,6 +6,14 @@
   @apply bg-light text-dark
 }
 
+:focus-visible {
+  @apply outline outline-2 outline-accent
+}
+
+* {
+  @apply selection:bg-accent-light
+}
+
 #root {
   @apply flex max-sm:flex-col
 }

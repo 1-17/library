@@ -1,11 +1,11 @@
-import { createElement } from "react"
+const code = {}
+
+code.component = {
+  "react_react-router-dom_tailwindcss_classnames": `import { createElement } from "react"
 import { Link } from "react-router-dom"
 import classNames from "classnames"
-import { usePopup } from "../../hooks"
 
-const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
-  const { popup } = usePopup()
-
+const Button = ({ variant, external, ...rest }) => {
   return (
     createElement(
       rest.href
@@ -20,17 +20,12 @@ const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
         },
         ...rest.href && {
           href: !rest.href.startsWith("http")
-            ? `https://${rest.href}`
+            ? \`https://\${rest.href}\`
             : rest.href
         },
         ...external && {
           target: "_blank",
           rel: "noopener noreferrer"
-        },
-        ...popupTrigger && {
-          "aria-expanded": popup !== "",
-          "aria-controls": "popup",
-          "aria-haspopup": "dialog"
         },
         className: classNames(
           {
@@ -39,9 +34,7 @@ const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
             "bg-dark border-dark text-light hover:brightness-150": variant === "filled",
             "hover:brightness-90": variant !== "filled",
             "bg-accent-light text-accent": variant === "primary",
-            "bg-light text-dark": variant === "secondary",
-            "leading-6": size === "sm",
-            "leading-8": !size
+            "bg-light text-dark": variant === "secondary"
           },
           rest.className
         )
@@ -51,3 +44,15 @@ const Button = ({ variant, size, external, popupTrigger, ...rest }) => {
 }
 
 export default Button
+`
+}
+
+code.usage = {
+  "react_react-router-dom_tailwindcss_classnames": [
+    `<Button href="google.com" external variant="primary">Click here</Button>`,
+    `<Button to="/example" variant="secondary">Click here</Button>`,
+    `<Button onClick={() => alert("Hello! You clicked me.")} variant="filled">Click here</Button>`,
+  ]
+}
+
+export default code

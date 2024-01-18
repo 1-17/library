@@ -1,4 +1,4 @@
-import { link } from "../components/articles/components"
+import { button, link } from "../components/articles/components"
 import { typography } from "../components/articles/widgets"
 
 const articles = {
@@ -6,14 +6,17 @@ const articles = {
     layout: [
       {
         name: "Link",
-        description: "Anchor tag ready for external links and route links that can be opened in a new tab.",
+        description: "Anchor tag ready for external links and route navigation that can be opened in a new tab.",
         cover: link.cover,
         preview: link.preview,
-        codes: link.codes
+        codes: link.code
       },
       {
         name: "Button",
-        description: "Do minim deserunt proident nostrud elit ad sint elit."
+        description: "Button or anchor tag ready for external links and route navigation, with style variants.",
+        cover: button.cover,
+        preview: button.preview,
+        codes: button.code
       },
       {
         name: "Header",

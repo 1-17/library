@@ -6,7 +6,7 @@ const CodeBox = ({ children, component }) => {
   const { copyToClipboard } = usePopup()
 
   return (
-    <div className="bg-dark rounded-shape flex justify-between text-light text-sm *:p-4">
+    <div className="bg-dark rounded-shape flex justify-between text-light text-sm *:p-4 selection:bg-accent">
       <pre className="w-full overflow-auto">
         <code>
           {children}

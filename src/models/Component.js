@@ -6,12 +6,12 @@ class Code {
 class Component extends Code {
   cover
   preview
-  codes
+  code
 
   constructor() {
     super()
 
-    this.codes = {
+    this.code = {
       component: this.component,
       usage: this.usage
     }
