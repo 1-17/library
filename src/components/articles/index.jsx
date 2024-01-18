@@ -11,11 +11,11 @@ const Articles = () => {
     return <ArticlesList />
   }
   
-  if (articles.selectedCategory === "Components" && articles.component.code) {
+  if (articles.component.code) {
     return <Component />
   }
 
-  if (articles.selectedCategory === "Widgets" && articles.widget.route) {
+  if (articles.widget.component && articles.widget.controls && articles.widget.route) {
     return <Widget />
   }
   

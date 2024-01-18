@@ -7,10 +7,13 @@ const Widget = () => {
 
   return (
     <>
+      <articles.widget.component />
+      <articles.widget.controls />
       <Button
         popupTrigger
         onClick={() => copyToClipboard(articles.widget.route, "Widget link")}
         variant="secondary"
+        className="max-w-[15rem]"
       >
         Get embed link
       </Button>

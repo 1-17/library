@@ -14,7 +14,7 @@ export const _useArticlesMethods = () => {
 
   const [selectedArticle, setSelectedArticle] = useState("")
 
-  const [selectedComponentTech, setSelectedComponentTech] = useState("")
+  const currentArticle = currentArticles.find(article => article.name === selectedArticle)
   
   const changeSelectedCategory = newCategory => {
     newCategory = newCategory.toLowerCase()
@@ -40,23 +40,21 @@ export const _useArticlesMethods = () => {
       setSelectedArticle(newArticle)
     }
   }
-
-  const currentComponent = (selectedCategory === "components" && selectedSubcategory && selectedArticle) && (
-    articles.components[selectedSubcategory].find(article => article.name === selectedArticle)
-  )
-
+  
   const component = {}
+  component.preview = currentArticle && currentArticle.preview
+  component.techs = (currentArticle && currentArticle.codes && currentArticle.codes.component) && Object.keys(currentArticle.codes.component)
+  
+  const [selectedComponentTech, setSelectedComponentTech] = useState("")
 
-  component.preview = currentComponent && currentComponent.preview
-  component.techs = (currentComponent && currentComponent.codes && currentComponent.codes.component) && Object.keys(currentComponent.codes.component)
   component.selectedTech = selectedComponentTech
   component.changeSelectedTech = newTech => selectedComponentTech !== newTech && setSelectedComponentTech(newTech)
-  component.code = component.techs && currentComponent.codes.component[selectedComponentTech]
-  component.usage = (currentComponent && currentComponent.codes) && currentComponent.codes.usage
-
+  component.code = component.techs && currentArticle.codes.component[selectedComponentTech]
+  component.usage = (currentArticle && currentArticle.codes) && currentArticle.codes.usage[selectedComponentTech]
+  
   useEffect(() => {
-    (currentComponent && component.techs) && setSelectedComponentTech(component.techs[0])
-  }, [currentComponent])
+    (currentArticle && component.techs) && setSelectedComponentTech(component.techs[0])
+  }, [currentArticle])
 
   const widget = {}
   widget.routes = []
@@ -68,7 +66,8 @@ export const _useArticlesMethods = () => {
           articles.map((article, i) => (
             {
               key: i,
-              path: `${categories}/${subcategory}/${formatArticleNameToRoutePath(article.name)}`
+              path: `${categories}/${subcategory}/${formatArticleNameToRoutePath(article.name)}`,
+              element: article.component
             }
           ))
         ))
@@ -76,6 +75,12 @@ export const _useArticlesMethods = () => {
     )
   })
 
+  const [widgetConfig, setWidgetConfig] = useState({})
+
+  widget.config = widgetConfig
+  widget.setConfig = setWidgetConfig
+  widget.component = currentArticle && currentArticle.component
+  widget.controls = currentArticle && currentArticle.controls
   widget.route = (selectedCategory === "widgets" && selectedArticle) && (
     document.location.href + widget.routes.find(route => route.path.includes(formatArticleNameToRoutePath(selectedArticle))).path
   )

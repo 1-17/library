@@ -18,7 +18,7 @@ const Pages = () => {
         </Route>
         {
           articles.widget.routes.map(route =>
-            <Route key={route.key} path={route.path} />
+            <Route key={route.key} path={route.path} element={<route.element />} />
           )
         }
       </Routes>

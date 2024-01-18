@@ -1,12 +1,13 @@
 import { link } from "../components/articles/components"
+import { typography } from "../components/articles/widgets"
 
 const articles = {
   components: {
     layout: [
       {
         name: "Link",
-        cover: link.cover,
         description: "Anchor tag ready for external links and route links that can be opened in a new tab.",
+        cover: link.cover,
         preview: link.preview,
         codes: link.codes
       },
@@ -38,7 +39,10 @@ const articles = {
     notion: [
       {
         name: "Typography",
-        description: "Deserunt sunt enim qui elit irure in."
+        description: "Deserunt sunt enim qui elit irure in.",
+        cover: typography.component,
+        component: typography.component,
+        controls: typography.controls
       }
     ]
   }
